@@ -1,1 +1,85 @@
-/* You can add global styles to this file, and also import other style files */
+/* ===== SCSS VARIABLES ===== */
+$cream: #fef6dd;
+$cream-light: #fffbe6;
+$cream-dark: #e6dcc4;
+
+$yellow: #f3e46d;
+$yellow-light: #fff9b3;
+$yellow-dark: #c2a900;
+
+$light-purple: #bf98ac;
+$light-purple-light: #e3c9e0;
+$light-purple-dark: #8c6b8a;
+
+$purple: #b1739a;
+$purple-light: #d5b3cb;
+$purple-dark: #7a4c6d;
+
+$pink: #ed7275;
+$pink-light: #ffb3b8;
+$pink-dark: #b34c53;
+
+$orange: #eb5b2b;
+$orange-light: #ffb380;
+$orange-dark: #a63d00;
+
+$red: #e1202d;
+$red-light: #ff6f6f;
+$red-dark: #990018;
+
+$dark-orange: #e67216;
+$dark-orange-light: #ffb366;
+$dark-orange-dark: #a65400;
+
+$gold: #edd600;
+$gold-light: #fff566;
+$gold-dark: #b3a200;
+
+$green: #0e8743;
+$green-light: #4fd68a;
+$green-dark: #085c2c;
+
+$light-blue: #a0c5c6;
+$light-blue-light: #e0f6f7;
+$light-blue-dark: #6b8c8d;
+
+$blue: #0a5c9f;
+$blue-light: #4a8cd6;
+$blue-dark: #07315c;
+
+$dark-blue: #392874;
+$dark-blue-light: #6c4fa6;
+$dark-blue-dark: #1a1433;
+
+$magenta: #c33479;
+$magenta-light: #e36ca6;
+$magenta-dark: #8c2556;
+
+$dark-magenta: #86215f;
+$dark-magenta-light: #b34c8a;
+$dark-magenta-dark: #4c102f;
+
+$black: #0d0e0e;
+$black-light: #4d5152;
+$black-dark: #111212;
+
+/* ===== RESET & BASE ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Fira Sans', Arial, sans-serif;
+  color: var(--text-primary);
+  background-color: var(--background-light);
+  overflow-x: hidden;
+  font-weight: 400;
+  letter-spacing: -0.022em;
+}

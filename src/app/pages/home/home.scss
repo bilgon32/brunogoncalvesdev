@@ -1,0 +1,368 @@
+@use '../../../styles.scss';
+
+/* Full screen hero page styles */
+.home-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Ensure hero takes full viewport height minus navigation */
+app-hero {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Override any section padding for full screen effect */
+.hero {
+  min-height: 100vh;
+  padding-top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 0;
+}
+
+$crt-effect-pixel-size: 3px;
+$chromatic-aberration-pixel-size: 3px;
+
+.hero {
+  background-color: styles.$black;
+  position: relative;
+  overflow: clip;
+  height: 100vh;
+  min-height: 0;
+  max-height: 100vh;
+
+  .gradient {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    mix-blend-mode: screen;
+    background: linear-gradient(-215deg,
+        styles.$black 0% 80%,
+        styles.$red-light 80% 85%,
+        styles.$red 85% 90%,
+        styles.$red-dark 90% 95%,
+        styles.$black 95% 100%);
+    background-size: 100% 100%;
+    opacity: 1;
+  }
+
+  .static-noise {
+    position: absolute;
+    left: 0;
+    top: 0;
+    inset: -200%;
+    z-index: 3;
+    mix-blend-mode: screen;
+    pointer-events: none;
+    background: url('/assets/images/noise.png') repeat;
+    background-size: 1000px;
+    opacity: 0.1;
+    animation: static-noise__movement 0.3s linear infinite both;
+  }
+
+  @keyframes static-noise__movement {
+    0% {
+      transform: translateX(10%) translateY(10%);
+    }
+
+    100% {
+      transform: translateX(-10%) translateY(-10%);
+    }
+  }
+
+  .static-noise-vhs {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 150%;
+    aspect-ratio: 1;
+    z-index: 3;
+    mix-blend-mode: hard-light;
+    pointer-events: none;
+    background-image: url('/assets/images/vhs-noise.jpg');
+    background-position: bottom;
+    background-repeat: repeat-x;
+    opacity: 0.05;
+    animation: static-noise-vhs__movement 0.2s infinite;
+    animation-direction: alternate;
+    animation-timing-function: steps(1);
+  }
+
+  @keyframes static-noise-vhs__movement {
+    0% {
+      transform: translateX(-4%) translateY(0%);
+    }
+
+    20% {
+      transform: translateX(2%) translateY(2%);
+    }
+
+    40% {
+      transform: translateX(-2%) translateY(-1%);
+    }
+
+    60% {
+      transform: translateX(4%) translateY(1%);
+    }
+
+    80% {
+      transform: translateX(-3%) translateY(-2%);
+    }
+
+    100% {
+      transform: translateX(3%) translateY(0%);
+    }
+  }
+
+  .screen-reflection {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 5;
+    mix-blend-mode: screen;
+    pointer-events: none;
+    background-image: url('/assets/images/screen-reflection.png');
+    background-size: cover;
+    background-position: right;
+    opacity: 0.75;
+  }
+
+  h1,
+  h2 {
+    //Chromatic aberration
+    color: styles.$cream;
+    text-shadow: 0px 0px 6px rgba(255, 255, 255, 1),
+    calc(-2 * #{$chromatic-aberration-pixel-size}) 0px 1px rgba(255, 0, 0, 0.4),
+    calc(-1 * #{$chromatic-aberration-pixel-size}) 0px 1px rgba(0, 255, 0, 0.4),
+    calc(1 * #{$chromatic-aberration-pixel-size}) 0px 1px rgba(0, 255, 0, 0.4),
+    calc(2 * #{$chromatic-aberration-pixel-size}) 0px 1px rgba(0, 0, 255, 0.4);
+  }
+
+  h1 {
+    font-family: "VT323", monospace;
+    position: relative;
+    font-size: 12rem;
+    word-spacing: -2rem;
+    line-height: 8rem;
+    font-variant: small-caps;
+    margin-bottom: 2rem;
+  }
+
+  h2 {
+    font-size: 4rem;
+    word-spacing: 0px;
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+  }
+
+  .vhs-osd h1 {
+    position: absolute;
+    left: 4rem;
+    top: 6rem;
+    font-size: 8rem;
+    z-index: 3;
+    mix-blend-mode: screen;
+    pointer-events: none;
+    opacity: 0.4;
+
+    .play-triangle {
+      padding-left: 10px;
+    }
+  }
+
+  &:before,
+  &:after {
+    content: "";
+    transform: translateZ(0);
+    pointer-events: none;
+    // opacity: 0.5;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+  }
+
+  &:before {
+    mix-blend-mode: overlay;
+    background: repeating-linear-gradient(90deg,
+      #FF0000 0px calc(1 * #{$crt-effect-pixel-size}),
+      #00FF00 calc(1 * #{$crt-effect-pixel-size}) calc(2 * #{$crt-effect-pixel-size}),
+      #0000FF calc(2 * #{$crt-effect-pixel-size}) calc(3 * #{$crt-effect-pixel-size}));
+    z-index: 1;
+  }
+
+  &:after {
+    mix-blend-mode: luminosity;
+    background: repeating-linear-gradient(transparent 0px,
+      transparent calc(2 * #{$crt-effect-pixel-size}),
+      rgba(0, 0, 0, 0.25) calc(2.5 * #{$crt-effect-pixel-size}),
+      transparent calc(3 * #{$crt-effect-pixel-size}),
+    );
+    z-index: 3;
+  }
+}
+
+.hero-text {
+  max-width: 980px;
+  margin: 0 auto;
+  flex: 1;
+  text-align: center;
+  position: relative;
+  z-index: 3;
+}
+
+.hero-links {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+
+  a {
+    mix-blend-mode: difference;
+    padding: 1rem 2rem;
+    font-size: 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    font-variant: small-caps;
+    border: styles.$purple 0.5rem solid;
+    color: styles.$purple;
+    text-shadow: 0px 0px 1rem styles.$purple;
+
+    &:hover {
+      color: styles.$purple-dark;
+      background: styles.$purple;
+    }
+  }
+}
+
+
+
+
+#player-controls {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  // bottom: 0;
+  // left: 0;
+  z-index: 10;
+  text-align: center;
+  background: styles.$black;
+  padding: 10px;
+  border-radius: 1rem;
+  width: fit-content;
+  margin: auto;
+
+  a {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+
+    span {
+      padding: 10px 8px;
+      background: linear-gradient(135deg, styles.$black-light 0%, styles.$black 50%, #222 55%, #444 80%, styles.$black-light 100%);
+      opacity: 0.75;
+      box-shadow: inset 0px 0px 4px styles.$black-dark;
+      width: 8rem;
+      font-weight: 600;
+      letter-spacing: 0.25rem;
+      text-transform: uppercase;
+      color: styles.$cream;
+      margin-bottom: 0.5rem;
+    }
+
+
+    button {
+      cursor: pointer;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 8rem;
+      height: 4rem;
+
+      background:
+        linear-gradient(-10deg,
+          rgba(175, 175, 175, 0.8) 0%,
+          rgba(190, 190, 190, 0.8) 40%,
+          rgba(230, 230, 230, 0.8) 55%,
+          rgba(210, 200, 200, 0.8) 65%,
+          rgba(200, 200, 200, 0.8) 100%),
+        repeating-linear-gradient(#aaa 0px 1px, #ddd 1px 2px, #999 2px 3px, #eee 3px 4px);
+
+      //Inset icon
+      font-size: 1.5rem;
+      font-variant: small-caps;
+      color: styles.$black;
+      text-shadow: 1px 1px 0 #ddd,
+        -1px -1px 0 #555;
+      box-shadow: 0px 0px 6px styles.$black;
+
+      //Borders
+      border-left: #555 0.1rem solid;
+      border-right: #444 0.1rem solid;
+      border-top: #ddd 0.5rem solid;
+      border-bottom: #bbb 0.5rem solid;
+
+      //Animation
+      transition: 0.1s ease-in;
+
+      i {
+        font-size: 1.5rem;
+      }
+
+      &:after {
+        content: "";
+        height: 4px;
+        width: 80%;
+        display: block;
+        position: absolute;
+        bottom: 0rem;
+        left: 10%;
+        border-radius: 3px;
+        transition: 0.1s ease-in;
+        background: styles.$black;
+        box-shadow: 1px 1px 0px #ddd,
+          -1px -1px 0px #555;
+      }
+    }
+
+    &:hover {
+
+      button {
+        // opacity: 0.8;
+        transform: perspective(1000px) translateZ(-20px);
+        color: styles.$green-light;
+
+        //Borders
+        border-left: #333 0.1rem solid;
+        border-right: #222 0.1rem solid;
+        border-top: #bbb 0.5rem solid;
+        border-bottom: #aaa 0.5rem solid;
+
+        &:after {
+          background: styles.$green-light;
+        }
+      }
+    }
+  }
+}
