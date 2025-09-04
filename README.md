@@ -12,3 +12,5 @@ The visual style is inspired by vintage audio and video equipment, such as tape 
 - SASS
 - Git versioning
 - CloudFare hosting
+
+---
