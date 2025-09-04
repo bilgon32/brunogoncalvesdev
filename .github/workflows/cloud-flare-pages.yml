@@ -17,5 +17,5 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist/browser --project-name=brunogoncalvesdev
+          command: npm run deploy
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
