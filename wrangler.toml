@@ -1,0 +1,6 @@
+# Configuration for Cloudflare Pages
+name = "brunogoncalvesdev"
+compatibility_date = "2025-09-04"
+
+# Directory with the built static files
+pages_build_output_dir = "dist/browser"
