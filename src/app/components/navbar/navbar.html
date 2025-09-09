@@ -1,0 +1,45 @@
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="nav-logo">
+      <!-- CRIAR LOGO. AO INVÉS DE LOGO PODE SER UM DISPLAY DE VCR -->
+      <a [routerLink]="'/'">
+        <span *ngIf="!this.showTime">BRUNO<span class="inactive-seven-segment">0000</span></span>
+        <span *ngIf="this.showTime">{{this.formattedTime}}<span class="inactive-seven-segment">000</span></span>
+      </a>
+    </div>
+    <div class="tape-deck">
+      <div class="cover">
+        4 HEAD HI-FI STEREO
+      </div>
+    </div>
+    <div id="player-controls"
+         class="nav-menu"
+         [class.nav-menu-open]="isMobileMenuOpen">
+      <a routerLink="/home"
+         class="nav-link"
+         routerLinkActive="button-active"
+         (click)="closeMobileMenu()">
+        Home
+      </a>
+      <!-- <a routerLink="/resume"
+         class="nav-link"
+         routerLinkActive="button-active"
+         (click)="closeMobileMenu()">
+        Resume
+      </a>
+      <a routerLink="/contact"
+         class="nav-link"
+         routerLinkActive="button-active"
+         (click)="closeMobileMenu()">
+        Contact
+      </a> -->
+    </div>
+    <div class="hamburger"
+         [class.hamburger-open]="isMobileMenuOpen"
+         (click)="toggleMobileMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</nav>
