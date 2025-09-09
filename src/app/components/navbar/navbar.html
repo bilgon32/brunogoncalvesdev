@@ -3,8 +3,8 @@
     <div class="nav-logo">
       <!-- CRIAR LOGO. AO INVÉS DE LOGO PODE SER UM DISPLAY DE VCR -->
       <a [routerLink]="'/'">
-        <span *ngIf="!this.showTime">BRUNO<span class="inactive-seven-segment">0000</span></span>
-        <span *ngIf="this.showTime">{{this.formattedTime}}<span class="inactive-seven-segment">000</span></span>
+        <span *ngIf="!this.showTime"><span class="inactive-seven-segment">000</span>BRUNO<span class="inactive-seven-segment">000</span></span>
+        <span *ngIf="this.showTime"><span class="inactive-seven-segment">000</span>{{this.formattedTime}}<span class="inactive-seven-segment">000</span></span>
       </a>
     </div>
     <div class="tape-deck">
