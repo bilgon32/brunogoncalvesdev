@@ -41,24 +41,6 @@ $chromatic-aberration-pixel-size: 3px;
   min-height: 0;
   max-height: 100vh;
 
-  .gradient {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    left: 0;
-    top: 0;
-    z-index: 2;
-    mix-blend-mode: screen;
-    background: linear-gradient(-215deg,
-        styles.$black 0% 80%,
-        styles.$red-light 80% 85%,
-        styles.$red 85% 90%,
-        styles.$red-dark 90% 95%,
-        styles.$black 95% 100%);
-    background-size: 100% 100%;
-    opacity: 1;
-  }
-
   .static-noise {
     position: absolute;
     left: 0;
@@ -198,6 +180,7 @@ $chromatic-aberration-pixel-size: 3px;
     top: 0;
   }
 
+  // RGB pixels
   &:before {
     mix-blend-mode: overlay;
     background: repeating-linear-gradient(90deg,
@@ -207,11 +190,12 @@ $chromatic-aberration-pixel-size: 3px;
     z-index: 1;
   }
 
+  // Horizontal scan lines
   &:after {
     mix-blend-mode: luminosity;
     background: repeating-linear-gradient(transparent 0px,
       transparent calc(2 * #{$crt-effect-pixel-size}),
-      rgba(0, 0, 0, 0.25) calc(2.5 * #{$crt-effect-pixel-size}),
+      rgba(0, 0, 0, 0.1) calc(2.5 * #{$crt-effect-pixel-size}),
       transparent calc(3 * #{$crt-effect-pixel-size}),
     );
     z-index: 3;
@@ -229,140 +213,32 @@ $chromatic-aberration-pixel-size: 3px;
 
 .hero-links {
   position: relative;
-  z-index: 5;
+  z-index: 2;
   display: flex;
   justify-content: center;
   gap: 1.5rem;
   margin-top: 2rem;
+  mix-blend-mode: screen;
+  // opacity: 0.75;
 
   a {
-    mix-blend-mode: difference;
-    padding: 1rem 2rem;
-    font-size: 2rem;
-    font-weight: 600;
+    font-family: "VT323", monospace;
+    padding: 0.75rem 1rem;
+    font-size: 2.5rem;
     text-decoration: none;
-    font-variant: small-caps;
-    border: styles.$purple 0.5rem solid;
-    color: styles.$purple;
-    text-shadow: 0px 0px 1rem styles.$purple;
+    color: styles.$cream;
+    text-shadow: 0px 0px 0.25rem styles.$cream;
+    border: transparent 0.4rem solid;
+    transition: all 0.2s ease;
 
     &:hover {
-      color: styles.$purple-dark;
-      background: styles.$purple;
-    }
-  }
-}
-
-
-
-
-#player-controls {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  // bottom: 0;
-  // left: 0;
-  z-index: 10;
-  text-align: center;
-  background: styles.$black;
-  padding: 10px;
-  border-radius: 1rem;
-  width: fit-content;
-  margin: auto;
-
-  a {
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-
-    span {
-      padding: 10px 8px;
-      background: linear-gradient(135deg, styles.$black-light 0%, styles.$black 50%, #222 55%, #444 80%, styles.$black-light 100%);
-      opacity: 0.75;
-      box-shadow: inset 0px 0px 4px styles.$black-dark;
-      width: 8rem;
-      font-weight: 600;
-      letter-spacing: 0.25rem;
-      text-transform: uppercase;
-      color: styles.$cream;
-      margin-bottom: 0.5rem;
+      border: styles.$cream 0.4rem solid;
+      box-shadow: 0px 0px 0.4rem styles.$cream,
+        inset 0px 0px 0.4rem styles.$cream;
     }
 
-
-    button {
-      cursor: pointer;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 8rem;
-      height: 4rem;
-
-      background:
-        linear-gradient(-10deg,
-          rgba(175, 175, 175, 0.8) 0%,
-          rgba(190, 190, 190, 0.8) 40%,
-          rgba(230, 230, 230, 0.8) 55%,
-          rgba(210, 200, 200, 0.8) 65%,
-          rgba(200, 200, 200, 0.8) 100%),
-        repeating-linear-gradient(#aaa 0px 1px, #ddd 1px 2px, #999 2px 3px, #eee 3px 4px);
-
-      //Inset icon
-      font-size: 1.5rem;
-      font-variant: small-caps;
-      color: styles.$black;
-      text-shadow: 1px 1px 0 #ddd,
-        -1px -1px 0 #555;
-      box-shadow: 0px 0px 6px styles.$black;
-
-      //Borders
-      border-left: #555 0.1rem solid;
-      border-right: #444 0.1rem solid;
-      border-top: #ddd 0.5rem solid;
-      border-bottom: #bbb 0.5rem solid;
-
-      //Animation
-      transition: 0.1s ease-in;
-
-      i {
-        font-size: 1.5rem;
-      }
-
-      &:after {
-        content: "";
-        height: 4px;
-        width: 80%;
-        display: block;
-        position: absolute;
-        bottom: 0rem;
-        left: 10%;
-        border-radius: 3px;
-        transition: 0.1s ease-in;
-        background: styles.$black;
-        box-shadow: 1px 1px 0px #ddd,
-          -1px -1px 0px #555;
-      }
-    }
-
-    &:hover {
-
-      button {
-        // opacity: 0.8;
-        transform: perspective(1000px) translateZ(-20px);
-        color: styles.$green-light;
-
-        //Borders
-        border-left: #333 0.1rem solid;
-        border-right: #222 0.1rem solid;
-        border-top: #bbb 0.5rem solid;
-        border-bottom: #aaa 0.5rem solid;
-
-        &:after {
-          background: styles.$green-light;
-        }
-      }
+    i {
+      margin-right: 0.75rem;
     }
   }
 }
