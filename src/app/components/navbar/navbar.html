@@ -3,9 +3,11 @@
     <div class="nav-logo">
       <!-- CRIAR LOGO. AO INVÉS DE LOGO PODE SER UM DISPLAY DE VCR -->
       <a [routerLink]="'/'">
-        <span *ngIf="!this.showTime"><span class="inactive-seven-segment">000</span>BRUNO<span class="inactive-seven-segment">000</span></span>
-        <span *ngIf="this.showTime"><span class="inactive-seven-segment">000</span>{{this.formattedTime}}<span class="inactive-seven-segment">000</span></span>
+        <span class="inactive-seven-segment">000</span>BRUNO<span class="inactive-seven-segment">000</span>
       </a>
+      <span class="ir-indicator"
+            [class.ir-indicator-active]="irIndicatorActive"
+            aria-hidden="true"></span>
     </div>
     <div class="tape-deck">
       <div class="cover">

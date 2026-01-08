@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
@@ -8,10 +8,12 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   templateUrl: './navbar.html',
   styleUrl: './navbar.scss'
 })
-export class Navbar implements OnInit {
+export class Navbar implements OnInit, OnDestroy {
   private mobileMenuOpen = false;
   private currentTime = new Date();
   public showTime = false;
+  private indicatorTimeout: ReturnType<typeof setTimeout> | null = null;
+  public irIndicatorActive = false;
 
   public get formattedTime(): string {
     // Format the time as HH:MMAM/PM
@@ -26,13 +28,13 @@ export class Navbar implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    setInterval(() => {
-      this.currentTime = new Date();
-    }, 1000);
+  }
 
-    setInterval(() => {
-      this.showTime = !this.showTime;
-    }, 5000);
+  ngOnDestroy(): void {
+    if (this.indicatorTimeout) {
+      clearTimeout(this.indicatorTimeout);
+      this.indicatorTimeout = null;
+    }
   }
 
   toggleMobileMenu(): void {
@@ -45,5 +47,22 @@ export class Navbar implements OnInit {
 
   get isMobileMenuOpen(): boolean {
     return this.mobileMenuOpen;
+  }
+
+  @HostListener('document:click')
+  handleDocumentClick(): void {
+    this.triggerIrIndicator();
+  }
+
+  private triggerIrIndicator(): void {
+    this.irIndicatorActive = true;
+
+    if (this.indicatorTimeout) {
+      clearTimeout(this.indicatorTimeout);
+    }
+
+    this.indicatorTimeout = setTimeout(() => {
+      this.irIndicatorActive = false;
+    }, 90);
   }
 }
